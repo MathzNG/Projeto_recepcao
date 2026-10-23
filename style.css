@@ -1,0 +1,371 @@
+
+/* ==============================
+   1. CONFIGURAÇÕES GERAIS
+============================== */
+
+:root {
+    --fundo: #0b1020;
+    --fundo-cartao: rgba(22, 29, 52, 0.78);
+    --texto: #f4f5fb;
+    --texto-secundario: #a7aec5;
+    --laranja: #ff9d42;
+    --roxo: #a78bfa;
+    --borda: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==============================
+   2. FUNDO ANIMADO
+============================== */
+
+.fundo-animado {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Cada círculo será criado pelo JavaScript */
+
+.circulo {
+    position: absolute;
+    bottom: -100px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: subir linear infinite;
+    will-change: transform, opacity;
+}
+
+/* Animação de baixo para cima */
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.45;
+    }
+
+    85% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-120vh) translateX(35px);
+        opacity: 0;
+    }
+}
+
+/* ==============================
+   3. ESTRUTURA DA PÁGINA
+============================== */
+
+.pagina {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 6% 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==============================
+   4. CABEÇALHO E LOGO
+============================== */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo-destaque {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--laranja), #ff6b45);
+    color: #171321;
+    font-size: 24px;
+    font-weight: 900;
+    box-shadow: 0 5px 25px rgba(255, 157, 66, 0.2);
+}
+
+/* ==============================
+   5. CONTEÚDO PRINCIPAL
+============================== */
+
+.conteudo {
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    padding: 65px 0;
+    text-align: center;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 9px 15px;
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    border-radius: 50px;
+    background: rgba(167, 139, 250, 0.08);
+    color: var(--roxo);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(38px, 6vw, 66px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    margin-bottom: 22px;
+}
+
+h1 span {
+    display: block;
+    color: var(--laranja);
+}
+
+.descricao {
+    max-width: 570px;
+    margin: 0 auto;
+    color: var(--texto-secundario);
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* ==============================
+   6. CARTÕES DE BENEFÍCIOS
+============================== */
+
+.beneficios {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 38px 0;
+}
+
+.beneficio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    padding: 20px 15px;
+    background: var(--fundo-cartao);
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.beneficio:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 157, 66, 0.45);
+    background: rgba(35, 42, 68, 0.9);
+}
+
+.icone {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: rgba(255, 157, 66, 0.12);
+    color: var(--laranja);
+    font-size: 21px;
+}
+
+.beneficio:nth-child(2) .icone {
+    color: #76e5b1;
+    background: rgba(118, 229, 177, 0.1);
+}
+
+.beneficio:nth-child(3) .icone {
+    color: var(--roxo);
+    background: rgba(167, 139, 250, 0.12);
+}
+
+.beneficio h2 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.beneficio p {
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* ==============================
+   7. BOTÃO PRINCIPAL
+============================== */
+
+.botao-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-width: 230px;
+    padding: 17px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffb45e, var(--laranja));
+    color: #211629;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 35px rgba(255, 157, 66, 0.17);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.botao-principal span {
+    font-size: 23px;
+    transition: transform 0.2s ease;
+}
+
+.botao-principal:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(255, 157, 66, 0.3);
+}
+
+.botao-principal:hover span {
+    transform: translateX(4px);
+}
+
+.botao-principal:focus-visible {
+    outline: 3px solid var(--roxo);
+    outline-offset: 4px;
+}
+
+.aviso {
+    margin-top: 17px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+/* ==============================
+   8. RODAPÉ
+============================== */
+
+.rodape {
+    padding: 22px 0 8px;
+    border-top: 1px solid var(--borda);
+    color: var(--texto-secundario);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ==============================
+   9. RESPONSIVIDADE
+============================== */
+
+@media (max-width: 760px) {
+    .pagina {
+        padding: 22px 5% 16px;
+    }
+
+    .conteudo {
+        padding: 55px 0;
+    }
+
+    h1 {
+        letter-spacing: -1px;
+    }
+
+    .descricao {
+        font-size: 15px;
+    }
+
+    .beneficios {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: 30px auto;
+    }
+
+    .beneficio {
+        padding: 16px;
+    }
+
+    .beneficio p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .logo {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .logo-destaque {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .etiqueta {
+        font-size: 9px;
+    }
+
+    .botao-principal {
+        width: 100%;
+    }
+}
+
+/* Respeita quem prefere menos animações */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
